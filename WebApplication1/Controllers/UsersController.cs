@@ -21,10 +21,21 @@ public class UsersController : ControllerBase
         new() { Id = 7, Username = "dangthig", FullName = "Đặng Thị Giang", Email = "g.dang@gmail.com", PhoneNumber = "0901000007", Address = "Nha Trang", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) }
     ];
 
-    // HTTP GET api/users: trả về 200 OK cùng toàn bộ người dùng.
+    // HTTP GET api/users?search=nguyen: tìm theo họ tên hoặc username.
+    // Nếu bỏ search, API trả về toàn bộ người dùng.
     [HttpGet]
     [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
-    public ActionResult<List<UserDto>> GetAll() => Ok(FakeUsers);
+    public ActionResult<List<UserDto>> GetAll([FromQuery] string? search = null)
+    {
+        var users = string.IsNullOrWhiteSpace(search)
+            ? FakeUsers
+            : FakeUsers
+                .Where(item => item.FullName.Contains(search.Trim(), StringComparison.OrdinalIgnoreCase) ||
+                               item.Username.Contains(search.Trim(), StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+        return Ok(users);
+    }
 
     // HTTP GET api/users/1: model binding lấy id từ URL.
     [HttpGet("{id:int}")]
