@@ -12,13 +12,13 @@ public class UsersController : ControllerBase
     // DTO trả về không chứa mật khẩu hoặc PasswordHash.
     private static readonly List<UserDto> FakeUsers =
     [
-        new() { Id = 1, Username = "nguyenvana", Email = "ana@gmail.com", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-2) },
-        new() { Id = 2, Username = "tranvanb", Email = "banb@gmail.com", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) },
-        new() { Id = 3, Username = "lethic", Email = "c.le@gmail.com", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-5) },
-        new() { Id = 4, Username = "phamvand", Email = "d.pham@gmail.com", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-4) },
-        new() { Id = 5, Username = "hoangthie", Email = "e.hoang@gmail.com", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-3) },
-        new() { Id = 6, Username = "vuminhf", Email = "f.vu@gmail.com", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-2) },
-        new() { Id = 7, Username = "dangthig", Email = "g.dang@gmail.com", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) }
+        new() { Id = 1, Username = "nguyenvana", FullName = "Nguyễn Văn An", Email = "ana@gmail.com", PhoneNumber = "0901000001", Address = "Hà Nội", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-2) },
+        new() { Id = 2, Username = "tranvanb", FullName = "Trần Văn Bình", Email = "banb@gmail.com", PhoneNumber = "0901000002", Address = "Đà Nẵng", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) },
+        new() { Id = 3, Username = "lethic", FullName = "Lê Thị Chi", Email = "c.le@gmail.com", PhoneNumber = "0901000003", Address = "Hải Phòng", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-5) },
+        new() { Id = 4, Username = "phamvand", FullName = "Phạm Văn Dũng", Email = "d.pham@gmail.com", PhoneNumber = "0901000004", Address = "Hồ Chí Minh", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-4) },
+        new() { Id = 5, Username = "hoangthie", FullName = "Hoàng Thị Em", Email = "e.hoang@gmail.com", PhoneNumber = "0901000005", Address = "Quảng Ninh", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-3) },
+        new() { Id = 6, Username = "vuminhf", FullName = "Vũ Minh Phúc", Email = "f.vu@gmail.com", PhoneNumber = "0901000006", Address = "Cần Thơ", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-2) },
+        new() { Id = 7, Username = "dangthig", FullName = "Đặng Thị Giang", Email = "g.dang@gmail.com", PhoneNumber = "0901000007", Address = "Nha Trang", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) }
     ];
 
     // HTTP GET api/users: trả về 200 OK cùng toàn bộ người dùng.
@@ -60,6 +60,10 @@ public class UsersController : ControllerBase
 
         user.Username = username;
         user.Email = email;
+        user.FullName = request.FullName.Trim();
+        user.PhoneNumber = request.PhoneNumber?.Trim() ?? string.Empty;
+        user.Address = request.Address?.Trim() ?? string.Empty;
+        user.AvatarUrl = string.IsNullOrWhiteSpace(request.AvatarUrl) ? null : request.AvatarUrl.Trim();
         user.UpdatedAt = DateTime.UtcNow;
         return Ok(user);
     }
