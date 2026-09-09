@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
+using System.Globalization;
+using System.Text;
 using WebApplication1.DTOs.User;
 
 namespace WebApplication1.Controllers;
@@ -27,14 +29,28 @@ public class UsersController : ControllerBase
     [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
     public ActionResult<List<UserDto>> GetAll([FromQuery] string? search = null)
     {
+        var normalizedSearch = NormalizeSearch(search);
         var users = string.IsNullOrWhiteSpace(search)
             ? FakeUsers
             : FakeUsers
-                .Where(item => item.FullName.Contains(search.Trim(), StringComparison.OrdinalIgnoreCase) ||
-                               item.Username.Contains(search.Trim(), StringComparison.OrdinalIgnoreCase))
+                .Where(item => NormalizeSearch(item.FullName).Contains(normalizedSearch, StringComparison.Ordinal) ||
+                               NormalizeSearch(item.Username).Contains(normalizedSearch, StringComparison.Ordinal))
                 .ToList();
 
         return Ok(users);
+    }
+
+    private static string NormalizeSearch(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+            return string.Empty;
+
+        var decomposed = value.Trim().Normalize(NormalizationForm.FormD);
+        var withoutDiacritics = new string(decomposed
+            .Where(character => CharUnicodeInfo.GetUnicodeCategory(character) != UnicodeCategory.NonSpacingMark)
+            .ToArray());
+
+        return withoutDiacritics.Normalize(NormalizationForm.FormC).ToLowerInvariant();
     }
 
     // HTTP GET api/users/1: model binding lấy id từ URL.
