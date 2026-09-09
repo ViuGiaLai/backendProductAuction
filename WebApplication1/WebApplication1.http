@@ -1,6 +1,29 @@
 @WebApplication1_HostAddress = http://localhost:5002
 
-GET {{WebApplication1_HostAddress}}/weatherforecast/
+# Lấy danh sách người dùng giả
+GET {{WebApplication1_HostAddress}}/api/users
 Accept: application/json
+
+###
+
+# Lấy người dùng theo id
+GET {{WebApplication1_HostAddress}}/api/users/1
+Accept: application/json
+
+###
+
+# Cập nhật người dùng; [ApiController] tự trả 400 nếu body không hợp lệ
+PUT {{WebApplication1_HostAddress}}/api/users/1
+Content-Type: application/json
+
+{
+  "username": "nguyenvana_updated",
+  "email": "ana.updated@gmail.com"
+}
+
+###
+
+# Khóa tài khoản (soft delete)
+DELETE {{WebApplication1_HostAddress}}/api/users/2
 
 ###
