@@ -6,7 +6,7 @@ Accept: application/json
 
 ###
 
-# Tìm người dùng theo họ tên hoặc username
+# Tìm người dùng theo họ tên (FullName)
 GET {{WebApplication1_HostAddress}}/api/users?search=Nguyen
 Accept: application/json
 

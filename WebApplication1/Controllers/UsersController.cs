@@ -28,7 +28,7 @@ public class UsersController : ControllerBase
         new() { Id = 12, Username = "truongsonn", FullName = "Trương Sơn Nam", Email = "n.truong@gmail.com", PhoneNumber = "0901000012", Address = "Thanh Hóa", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-10) }
     ];
 
-    // HTTP GET api/users?search=nguyen: tìm theo họ tên hoặc username.
+    // HTTP GET api/users?search=nguyen: tìm theo họ tên (FullName), không tìm theo username.
     // Nếu bỏ search, API trả về toàn bộ người dùng.
     [HttpGet]
     [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
@@ -38,8 +38,7 @@ public class UsersController : ControllerBase
         var users = string.IsNullOrWhiteSpace(search)
             ? FakeUsers
             : FakeUsers
-                .Where(item => NormalizeSearch(item.FullName).Contains(normalizedSearch, StringComparison.Ordinal) ||
-                               NormalizeSearch(item.Username).Contains(normalizedSearch, StringComparison.Ordinal))
+                .Where(item => NormalizeSearch(item.FullName).Contains(normalizedSearch, StringComparison.Ordinal))
                 .ToList();
 
         return Ok(users);
