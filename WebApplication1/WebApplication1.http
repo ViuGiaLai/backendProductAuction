@@ -18,6 +18,7 @@ Content-Type: application/json
 
 {
   "username": "nguyenvana_updated",
+  "fullName": "Nguyễn Văn An Cập Nhật",
   "email": "ana.updated@gmail.com"
 }
 
