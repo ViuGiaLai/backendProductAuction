@@ -20,7 +20,12 @@ public class UsersController : ControllerBase
         new() { Id = 4, Username = "phamvand", FullName = "Phạm Văn Dũng", Email = "d.pham@gmail.com", PhoneNumber = "0901000004", Address = "Hồ Chí Minh", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-4) },
         new() { Id = 5, Username = "hoangthie", FullName = "Hoàng Thị Em", Email = "e.hoang@gmail.com", PhoneNumber = "0901000005", Address = "Quảng Ninh", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-3) },
         new() { Id = 6, Username = "vuminhf", FullName = "Vũ Minh Phúc", Email = "f.vu@gmail.com", PhoneNumber = "0901000006", Address = "Cần Thơ", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-2) },
-        new() { Id = 7, Username = "dangthig", FullName = "Đặng Thị Giang", Email = "g.dang@gmail.com", PhoneNumber = "0901000007", Address = "Nha Trang", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) }
+        new() { Id = 7, Username = "dangthig", FullName = "Đặng Thị Giang", Email = "g.dang@gmail.com", PhoneNumber = "0901000007", Address = "Nha Trang", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-1) },
+        new() { Id = 8, Username = "ngominhh", FullName = "Ngô Minh Huy", Email = "h.ngo@gmail.com", PhoneNumber = "0901000008", Address = "Huế", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-6) },
+        new() { Id = 9, Username = "doanthiil", FullName = "Đoàn Thị Lan", Email = "i.doan@gmail.com", PhoneNumber = "0901000009", Address = "Vũng Tàu", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-7) },
+        new() { Id = 10, Username = "buiquangj", FullName = "Bùi Quang Khang", Email = "j.bui@gmail.com", PhoneNumber = "0901000010", Address = "Bắc Ninh", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-8) },
+        new() { Id = 11, Username = "lythim", FullName = "Lý Thị Mai", Email = "m.ly@gmail.com", PhoneNumber = "0901000011", Address = "Lào Cai", Role = "Buyer", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-9) },
+        new() { Id = 12, Username = "truongsonn", FullName = "Trương Sơn Nam", Email = "n.truong@gmail.com", PhoneNumber = "0901000012", Address = "Thanh Hóa", Role = "Seller", IsActive = true, CreatedAt = DateTime.UtcNow.AddDays(-10) }
     ];
 
     // HTTP GET api/users?search=nguyen: tìm theo họ tên hoặc username.
